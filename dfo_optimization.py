@@ -24,7 +24,7 @@ from blackbox_opt.bb_optimize import bb_optimize
 from blackbox_opt.test_funcs.funcs_def import (ackley, sphere, rosen,
                                                booth, bukin, beale)
 import sys
-sys.path.append('DARP-Python')
+sys.path.append('DARP')
 from darpinPoly import DARPinPoly
 
 cols = 10
