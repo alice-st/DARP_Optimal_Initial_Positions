@@ -4,7 +4,6 @@ import sys
 
 sys.path.append('DARP')
 from mpl_toolkits import mplot3d
-from ortools.sat.python import cp_model
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -32,7 +31,7 @@ def main():
 
     positions = range(possible_possitions)
     # remove obstacles
-    positions = [position for position in positions if position not in obstacles_positions]
+    # positions = [position for position in positions if position not in obstacles_positions]
 
     pool = multiprocessing.Pool()
     async_results_list = []
@@ -45,13 +44,22 @@ def main():
 
     for result in results_list:
         print(result.init_coordinates, result.mode, result.avg)
-    return
 
 
 def calculate_avgs(init_positions: tuple):
     init_coordinates = []
+
+    if (init_positions[0] == init_positions[1]):
+        return results(init_positions, minimum_mode, sys.maxsize)
+    for obstacle in obstacles_positions:
+        if init_positions[0] == obstacle:
+            return results(init_positions, minimum_mode, sys.maxsize)
+        if init_positions[1] == obstacle:
+            return results(init_positions, minimum_mode, sys.maxsize)
+
     for init_position in init_positions:
         init_coordinates.append((init_position // cols, init_position % cols))
+
     turns = DARPinPoly(rows, cols, MaxIter, CCvariation, randomLevel, dcells, importance, nep, init_coordinates, portions, obstacles_coords, False)
 
     minimun_avg = sys.maxsize

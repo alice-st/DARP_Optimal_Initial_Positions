@@ -29,7 +29,7 @@ from darpinPoly import DARPinPoly
 
 cols = 10
 rows = 10
-MaxIter = 5000
+MaxIter = 80000
 CCvariation = 0.01
 randomLevel = 0.0001
 dcells = 2
@@ -61,22 +61,19 @@ def get_results(func, x_0, alg, options):
 
 
 def darp_func(init_positions):
-    print("--------------------")
-    print(init_positions)
-    print("--------------------")
     init_coordinates = []
     for init_position in init_positions:
         init_coordinates.append((int(init_position // cols), int(init_position % cols)))
 
     turns = DARPinPoly(rows, cols, MaxIter, CCvariation, randomLevel, dcells, importance, nep, init_coordinates, portions, obstacles_coords, False)
-
-
     minimun_avg = sys.maxsize
     minimum_mode = 1
-    for mode, val in turns.mode_to_drone_turns.items():
-        if val.avg < minimun_avg:
-            minimun_avg = val.avg
-            minimum_mode = mode
+
+    if turns.success:
+        for mode, val in turns.mode_to_drone_turns.items():
+            if val.avg < minimun_avg:
+                minimun_avg = val.avg
+                minimum_mode = mode
 
     return minimun_avg
 
