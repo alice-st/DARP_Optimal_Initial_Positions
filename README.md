@@ -3,8 +3,10 @@
 ## Optimization Results
 
 Image 1: Best Result Found
+
 Image 2: A Medium Result
-Imafe 3: Worst Result Found
+
+Image 3: Worst Result Found
 
 ### Grid Dimensions: 10x10, Number of drones: 3, Without Obstacles
 
