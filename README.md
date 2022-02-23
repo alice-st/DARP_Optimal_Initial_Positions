@@ -70,7 +70,7 @@
 
 <p align="left">
   <img width="250" height="250" src="All_Results/best Results/6_20_20_No_obs.jpeg">
-  <img width="280" height="250" src="All_Results/medium_results/6_20_20_No_obs.jpeg">
+  <img width="250" height="250" src="All_Results/medium_results/6_20_20_No_obs.jpeg">
   <img width="250" height="250" src="All_Results/worst_results/6_20_20_No_obs.jpeg">
 </p>
 
