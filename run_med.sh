@@ -10,7 +10,7 @@ python3 DARP/multiRobotPathPlanner.py -vis -grid 10 10 -in_pos 26 79 9 88 91 81 
 python3 DARP/multiRobotPathPlanner.py -vis -grid 15 20 -in_pos 106 165 15 55 208 257 47 162 41
 python3 DARP/multiRobotPathPlanner.py -vis -grid 20 20 -in_pos 204 107 386 162 290 232 379 142 370 
 
-python3 DARP/multiRobotPathPlanner.py -vis -grid 10 10 -obs_pos 3 4 5 6 7 96 97 98 99 -in_pos 153 152 150
+python3 DARP/multiRobotPathPlanner.py -vis -grid 10 10 -obs_pos 3 4 5 6 7 96 97 98 99 -in_pos 33 82 0
 python3 DARP/multiRobotPathPlanner.py -vis -grid 15 20 -obs_pos 3 4 5 6 7 8 9 10 55 56 57 58 59 110 111 113 114 115 255 256 232 233 96 97 98 99 77 78 79 80 -in_pos 238 215 224 
 python3 DARP/multiRobotPathPlanner.py -vis -grid 20 20 -obs_pos 3 4 5 6 7 8 9 10 55 56 57 58 59 110 111 113 114 115 255 256 232 233 96 97 98 99 77 78 79 80 41 42 43 44 45 46 47 48 49 50 -in_pos 330 211 0
 
