@@ -9,8 +9,6 @@ sys.path.append('DARP')
 from multiRobotPathPlanner import MultiRobotPathPlanner
 from optuna.structs import TrialPruned
 
-NUM_TRIALS = 1000
-
 class optimize():
     def __init__(self, rows, cols, MaxIter, CCvariation, randomLevel, dcells, importance, nep, portions, obstacles_positions, vis, num_drones):
         # DARP Parameters
