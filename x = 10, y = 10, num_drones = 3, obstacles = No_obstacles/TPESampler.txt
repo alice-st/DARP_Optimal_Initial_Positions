@@ -1,0 +1,24 @@
+Best trial: 44 
+Best value: 18.0 
+Best param: {'p0': 93, 'p1': 2, 'p2': 53} 
+Best_avg: 18.0
+Best trial: 121 
+Best value: 18.0 
+Best param: {'p0': 85, 'p1': 6, 'p2': 55} 
+Best_avg: 17.333333333333332
+Best trial: 164 
+Best value: 18.0 
+Best param: {'p0': 31, 'p1': 34, 'p2': 39} 
+Best_avg: 16.666666666666668
+Best trial: 177 
+Best value: 18.0 
+Best param: {'p0': 30, 'p1': 35, 'p2': 39} 
+Best_avg: 16.666666666666668
+Best trial: 230 
+Best value: 16.0 
+Best param: {'p0': 10, 'p1': 90, 'p2': 40} 
+Best_avg: 15.333333333333334
+Best trial: 91 
+Best value: 18.0 
+Best param: {'p0': 69, 'p1': 50, 'p2': 65} 
+Best_avg: 17.333333333333332

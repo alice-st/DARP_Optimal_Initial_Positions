@@ -26,7 +26,9 @@ class optimize():
         self.obstacles_coords = obstacles_positions
 
         # Optimization Parameters
-        self.samplers = [optuna.samplers.TPESampler()]
+        self.samplers = [optuna.samplers.TPESampler(), 
+                        optuna.integration.BoTorchSampler(),
+                        optuna.samplers.CmaEsSampler()]
         self.number_of_trials = 500
         self.results = []
         self.all_instances = []

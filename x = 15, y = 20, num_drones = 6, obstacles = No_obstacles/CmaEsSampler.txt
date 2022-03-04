@@ -1,0 +1,32 @@
+Best trial: 36 
+Best value: 32.0 
+Best param: {'p0': 197, 'p1': 128, 'p2': 131, 'p3': 73, 'p4': 121, 'p5': 163} 
+Best_avg: 34.333333333333336
+Best trial: 247 
+Best value: 32.0 
+Best param: {'p0': 182, 'p1': 100, 'p2': 235, 'p3': 50, 'p4': 255, 'p5': 139} 
+Best_avg: 37.166666666666664
+Best trial: 274 
+Best value: 32.0 
+Best param: {'p0': 212, 'p1': 102, 'p2': 192, 'p3': 48, 'p4': 219, 'p5': 158} 
+Best_avg: 34.333333333333336
+Best trial: 293 
+Best value: 32.0 
+Best param: {'p0': 223, 'p1': 95, 'p2': 157, 'p3': 40, 'p4': 212, 'p5': 208} 
+Best_avg: 34.166666666666664
+Best trial: 295 
+Best value: 32.0 
+Best param: {'p0': 251, 'p1': 111, 'p2': 99, 'p3': 9, 'p4': 192, 'p5': 266} 
+Best_avg: 37.166666666666664
+Best trial: 296 
+Best value: 32.0 
+Best param: {'p0': 232, 'p1': 109, 'p2': 115, 'p3': 29, 'p4': 182, 'p5': 230} 
+Best_avg: 39.833333333333336
+Best trial: 385 
+Best value: 32.0 
+Best param: {'p0': 174, 'p1': 139, 'p2': 134, 'p3': 39, 'p4': 205, 'p5': 201} 
+Best_avg: 33.5
+Best trial: 431 
+Best value: 32.0 
+Best param: {'p0': 201, 'p1': 138, 'p2': 79, 'p3': 18, 'p4': 153, 'p5': 253} 
+Best_avg: 41.833333333333336
