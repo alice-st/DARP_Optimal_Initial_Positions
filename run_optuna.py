@@ -10,7 +10,7 @@ def main():
 
     optimization_instance = optimize(10, 10, MaxIter, CCvariation, randomLevel, dcells, importance, False, [0.2, 0.3, 0.5], [], False, 3)
     optimization_instance.optimize()
-    optimization_instance.export_results()
+    # optimization_instance.export_results()
 
     import pdb
     pdb.set_trace()

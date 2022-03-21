@@ -26,30 +26,23 @@ class optimize():
         self.obstacles_coords = obstacles_positions
         self.vis = vis
         # Optimization Parameters
-        self.samplers = [optuna.samplers.TPESampler()] 
-                        # optuna.integration.BoTorchSampler(),
-                        # optuna.samplers.CmaEsSampler()]
-        self.number_of_trials = 50
+        self.samplers = [optuna.samplers.TPESampler(), 
+                        optuna.integration.BoTorchSampler(),
+                        optuna.samplers.CmaEsSampler()]
+        self.number_of_trials = 500
         self.results = []
-        self.all_instances = []
+        self.best_avg = sys.maxsize
 
     def optimize(self):        
         for sampler in self.samplers:
             study = optuna.create_study(
                 study_name="study",
-                directions=["minimize"],
+                directions=["maximize"],
                 sampler=sampler,
                 pruner=optuna.pruners.MedianPruner()
             )
             study.optimize(self.objective, n_trials=self.number_of_trials)
             self.results.append(study)
-
-        for result in self.results:
-                best_avg = sys.maxsize
-                for t in result.best_trials:
-                    if self.all_instances[t.number].best_case.avg < best_avg:
-                        best_avg = self.all_instances[t.number].best_case.avg
-                        self.best_trial = self.all_instances[t.number]
 
     def objective(self, trial):
         positions = []
@@ -58,18 +51,15 @@ class optimize():
             positions.append(trial.suggest_int(f"p{i}", 0, self.rows*self.cols-1))
 
         if len(positions) != len(set(positions)):
-            self.all_instances.append("Pruned")
             raise TrialPruned()
-
+        
         for obstacle in self.obstacles_positions:
             for p in positions:
                 if p == obstacle:
-                    self.all_instances.append("Pruned")
                     raise TrialPruned()
-        
+
         multiRobotPathPlanner_instance = MultiRobotPathPlanner(self.rows, self.cols, self.nep, positions, self.portions, self.obstacles_coords, self.vis)
-        self.all_instances.append(multiRobotPathPlanner_instance)
-        
+
         if not multiRobotPathPlanner_instance.DARP_success:
             raise TrialPruned()
         else:
@@ -94,11 +84,10 @@ class optimize():
             for t in result.best_trials:
                 print(f"Best trial: {t.number}")
                 print(f'Best value: {t.values[0]}')
-                print(f"Best Average: {self.all_instances[t.number].best_case.avg}")
                 print(f'Best param: {t.params}')
 
                 with open(f'x = {self.rows}, y = {self.cols}, num_drones = {self.number_of_drones}, obstacles = {obs_flag}/{result.sampler}.txt', "a") as f1:
-                    f1.write(f"Best trial: %s \nBest value: %s \nBest param: %s \nBest_avg: %s\n" % (t.number, t.values[0], t.params, self.all_instances[t.number].best_case.avg))
+                    f1.write(f"Best trial: %s \nBest value: %s \nBest param: %s:\n" % (t.number, t.values[0], t.params))
                     f1.close()
 
             params = []
@@ -127,12 +116,11 @@ class optimize():
                     f1.write(f'{pos}, {res}\n')
                 
                 f1.close()
-            
+
             fig = optuna.visualization.plot_contour(result, params=params)
             fig.write_image(f'x = {self.rows}, y = {self.cols}, num_drones = {self.number_of_drones}, obstacles = {obs_flag}/{result.sampler}_contour.png')
 
             counter += 1
-       
 
 if __name__ == '__main__':
 
