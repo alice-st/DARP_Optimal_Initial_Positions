@@ -15,9 +15,9 @@ In essence, the DARP algorithm follows a cyclic coordinate descent optimization 
 ### Grid Dimensions: 15x20, Number of drones: 3, Without Obstacles
 
 <p align="left">
-  <img width="250" height="250" src="Second_method_results/Paths/best_paths/x = 15, y = 20, num_drones = 3, obstacles = No_obstacles.png">
-  <img width="250" height="250" src="Second_method_results/Paths/medium_paths/x = 15, y = 20, num_drones = 3, obstacles = No_obstacles.png">
-  <img width="250" height="250" src="Second_method_results/Paths/worst_paths/x = 15, y = 20, num_drones = 3, obstacles = No_obstacles.png">
+  <img width="250" height="187.5" src="Second_method_results/Paths/best_paths/x = 15, y = 20, num_drones = 3, obstacles = No_obstacles.png">
+  <img width="250" height="187.5" src="Second_method_results/Paths/medium_paths/x = 15, y = 20, num_drones = 3, obstacles = No_obstacles.png">
+  <img width="250" height="187.5" src="Second_method_results/Paths/worst_paths/x = 15, y = 20, num_drones = 3, obstacles = No_obstacles.png">
 </p>
 
 ### Grid Dimensions: 20x20, Number of drones: 3, Without Obstacles
@@ -39,9 +39,9 @@ In essence, the DARP algorithm follows a cyclic coordinate descent optimization 
 ### Grid Dimensions: 15x20, Number of drones: 3, With Obstacles
 
 <p align="left">
-  <img width="250" height="250" src="Second_method_results/Paths/best_paths/x = 15, y = 20, num_drones = 3, obstacles = With_obstacles.png">
-  <img width="250" height="250" src="Second_method_results/Paths/medium_paths/x = 15, y = 20, num_drones = 3, obstacles = With_obstacles.png">
-  <img width="250" height="250" src="Second_method_results/Paths/worst_paths/x = 15, y = 20, num_drones = 3, obstacles = With_obstacles.png">
+  <img width="250" height="187.5" src="Second_method_results/Paths/best_paths/x = 15, y = 20, num_drones = 3, obstacles = With_obstacles.png">
+  <img width="250" height="187.5" src="Second_method_results/Paths/medium_paths/x = 15, y = 20, num_drones = 3, obstacles = With_obstacles.png">
+  <img width="250" height="187.5" src="Second_method_results/Paths/worst_paths/x = 15, y = 20, num_drones = 3, obstacles = With_obstacles.png">
 </p>
 
 ### Grid Dimensions: 20x20, Number of drones: 3, With Obstacles
@@ -63,9 +63,9 @@ In essence, the DARP algorithm follows a cyclic coordinate descent optimization 
 ### Grid Dimensions: 15x20, Number of drones: 6, Without Obstacles
 
 <p align="left">
-  <img width="250" height="250" src="Second_method_results/Paths/best_paths/x = 15, y = 20, num_drones = 6, obstacles = No_obstacles.png">
-  <img width="250" height="250" src="Second_method_results/Paths/medium_paths/x = 15, y = 20, num_drones = 6, obstacles = No_obstacles.png">
-  <img width="250" height="250" src="Second_method_results/Paths/worst_paths/x = 15, y = 20, num_drones = 6, obstacles = No_obstacles.png">
+  <img width="250" height="187.5" src="Second_method_results/Paths/best_paths/x = 15, y = 20, num_drones = 6, obstacles = No_obstacles.png">
+  <img width="250" height="187.5" src="Second_method_results/Paths/medium_paths/x = 15, y = 20, num_drones = 6, obstacles = No_obstacles.png">
+  <img width="250" height="187.5" src="Second_method_results/Paths/worst_paths/x = 15, y = 20, num_drones = 6, obstacles = No_obstacles.png">
 </p>
 
 ### Grid Dimensions: 20x20, Number of drones: 6, Without Obstacles
@@ -87,9 +87,9 @@ In essence, the DARP algorithm follows a cyclic coordinate descent optimization 
 ### Grid Dimensions: 15x20, Number of drones: 6, With Obstacles
 
 <p align="left">
-  <img width="250" height="250" src="Second_method_results/Paths/best_paths/x = 15, y = 20, num_drones = 6, obstacles = With_obstacles.png">
-  <img width="250" height="250" src="Second_method_results/Paths/medium_paths/x = 15, y = 20, num_drones = 6, obstacles = With_obstacles.png">
-  <img width="250" height="250" src="Second_method_results/Paths/worst_paths/x = 15, y = 20, num_drones = 6, obstacles = With_obstacles.png">
+  <img width="250" height="187.5" src="Second_method_results/Paths/best_paths/x = 15, y = 20, num_drones = 6, obstacles = With_obstacles.png">
+  <img width="250" height="187.5" src="Second_method_results/Paths/medium_paths/x = 15, y = 20, num_drones = 6, obstacles = With_obstacles.png">
+  <img width="250" height="187.5" src="Second_method_results/Paths/worst_paths/x = 15, y = 20, num_drones = 6, obstacles = With_obstacles.png">
 </p>
 
 ### Grid Dimensions: 20x20, Number of drones: 6, With Obstacles
@@ -112,9 +112,9 @@ In essence, the DARP algorithm follows a cyclic coordinate descent optimization 
 ### Grid Dimensions: 15x20, Number of drones: 9, Without Obstacles
 
 <p align="left">
-  <img width="250" height="250" src="Second_method_results/Paths/best_paths/x = 15, y = 20, num_drones = 9, obstacles = No_obstacles.png">
-  <img width="250" height="250" src="Second_method_results/Paths/medium_paths/x = 15, y = 20, num_drones = 9, obstacles = No_obstacles.png">
-  <img width="250" height="250" src="Second_method_results/Paths/worst_paths/x = 15, y = 20, num_drones = 9, obstacles = No_obstacles.png">
+  <img width="250" height="187.5" src="Second_method_results/Paths/best_paths/x = 15, y = 20, num_drones = 9, obstacles = No_obstacles.png">
+  <img width="250" height="187.5" src="Second_method_results/Paths/medium_paths/x = 15, y = 20, num_drones = 9, obstacles = No_obstacles.png">
+  <img width="250" height="187.5" src="Second_method_results/Paths/worst_paths/x = 15, y = 20, num_drones = 9, obstacles = No_obstacles.png">
 </p>
 
 ### Grid Dimensions: 20x20, Number of drones: 9, Without Obstacles
@@ -136,9 +136,9 @@ In essence, the DARP algorithm follows a cyclic coordinate descent optimization 
 ### Grid Dimensions: 15x20, Number of drones: 9, With Obstacles
 
 <p align="left">
-  <img width="250" height="250" src="Second_method_results/Paths/best_paths/x = 15, y = 20, num_drones = 9, obstacles = With_obstacles.png">
-  <img width="250" height="250" src="Second_method_results/Paths/medium_paths/x = 15, y = 20, num_drones = 9, obstacles = With_obstacles.png">
-  <img width="250" height="250" src="Second_method_results/Paths/worst_paths/x = 15, y = 20, num_drones = 9, obstacles = With_obstacles.png">
+  <img width="250" height="187.5" src="Second_method_results/Paths/best_paths/x = 15, y = 20, num_drones = 9, obstacles = With_obstacles.png">
+  <img width="250" height="187.5" src="Second_method_results/Paths/medium_paths/x = 15, y = 20, num_drones = 9, obstacles = With_obstacles.png">
+  <img width="250" height="187.5" src="Second_method_results/Paths/worst_paths/x = 15, y = 20, num_drones = 9, obstacles = With_obstacles.png">
 </p>
 
 ### Grid Dimensions: 20x20, Number of drones: 9, With Obstacles
