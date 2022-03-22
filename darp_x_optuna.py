@@ -25,6 +25,7 @@ class optimize():
         self.obstacles_positions = obstacles_positions
         self.obstacles_coords = obstacles_positions
         self.vis = vis
+        
         # Optimization Parameters
         self.samplers = [optuna.samplers.TPESampler(), 
                         optuna.integration.BoTorchSampler(),
