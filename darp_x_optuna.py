@@ -10,6 +10,7 @@ import time
 import matplotlib as plt
 import optuna
 import sys
+import random
 from optuna.samplers import TPESampler
 from DARP.multiRobotPathPlanner import MultiRobotPathPlanner
 from optuna.structs import TrialPruned
@@ -21,6 +22,7 @@ from RealWorld.ConnectComponent import ConnectComponent
 from RealWorld.visualizeNEDPaths.visualizeNEDPaths import PlotNEDPaths
 from RealWorld.handleGeo.GridPathsToNED import GridPathsToNED
 from RealWorld.handleGeo import Dist
+from DARPinPoly import DARPinPoly
 from DARPparameters import *
 
 sys.path.append('DARP')
@@ -164,6 +166,52 @@ class optimize():
             counter += 1
 
 
+def initializeDARPGrid(randomInitPos, l, m, initialPos, megaNodes, theta, shiftX,
+                       shiftY, DARPgrid):
+    if randomInitPos:
+
+        # Add drones in random initial positions
+        c = 0
+        while c < droneNo:
+            # Initial positions of drones
+            ind1 = random.randrange(0, l, 1)
+            ind2 = random.randrange(0, m, 1)
+            if DARPgrid[ind1][ind2] == 0:
+                DARPgrid[ind1][ind2] = 2
+                c += 1
+
+    else:
+
+        # Add drones in the closest mega-node
+        i1 = 0
+        i2 = 0
+
+        # Convert initial positions from WGS84 to NED
+        initPosNED = ConvCoords(geoCoords, geoObstacles).convWGS84ToNED(initialPos)
+
+        # Rotate and shift initial positions
+        rotate = Rotate()
+        rotate.setTheta(theta)
+        initialPosNED = rotate.rotatePolygon(initPosNED)
+        for i in range(len(initialPos)):
+            initialPosNED[i][0] += shiftX
+            initialPosNED[i][1] += shiftY
+
+        for i in range(len(initialPosNED)):
+            minDist = sys.float_info.max
+            for j in range(l):
+                for k in range(m):
+                    distance = Dist.euclidean(initialPosNED[i], [megaNodes[j][k][0], megaNodes[j][k][1]])
+                    if distance < minDist and megaNodes[j][k][2] == 0:
+                        minDist = distance
+                        i1 = j
+                        i2 = k
+
+            DARPgrid[i1][i2] = 2
+            megaNodes[i1][i2][2] = -1
+
+    return DARPgrid
+
 if __name__ == '__main__':
 
     if real_world:
@@ -250,8 +298,9 @@ if __name__ == '__main__':
         droneNo = data['droneNo']
         portions = data['rPortions']
         pathsStrictlyInPoly = data['pathsStrictlyInPoly']
+        optimal_init_pos = data['OptimalInitPos']
 
-        randomInitPos = False  # If false define in WGS84 the initialPos of the drones
+        randomInitPos = True  # If false define in WGS84 the initialPos of the drones
         notEqualPortions = True
         initial_positions = []
         for i in data['initialPos']:
@@ -351,25 +400,50 @@ if __name__ == '__main__':
         dcells = 2
         importance = False
 
+
         ####################################################################################################################
         #                                  Run with optimal or random initial positions
         ####################################################################################################################
 
-        # Optuna optimization
-        optimization = optimize(rows, cols, MaxIter, CCvariation, randomLevel, dcells, importance, notEqualPortions,
-                                portions,
-                                obs_pos, False, droneNo, DARPgrid)
+        if optimal_init_pos:  # Runs with OPTUNA !!
+            # Optuna optimization
+            optimization = optimize(rows, cols, MaxIter, CCvariation, randomLevel, dcells, importance, notEqualPortions,
+                                    portions,
+                                    obs_pos, False, droneNo, DARPgrid)
 
-        optimization.optimize()
+            optimization.optimize()
 
-        NEDdata = GridPathsToNED(optimization, droneNo, subNodes, rotate)
-        init_posNED = NEDdata.init_posGRIDToNED()
-        """ WaypointsNED are in the form of WaypointsNED[DroneNo][0]"""
-        WaypointsNED = NEDdata.getWaypointsNED()
-        # print("Initial positions", init_posNED)
-        # print("Waypoints", WaypointsNED)
+            NEDdata = GridPathsToNED(optimization, droneNo, subNodes, rotate)
+            init_posNED = NEDdata.init_posGRIDToNED()
+            """ WaypointsNED are in the form of WaypointsNED[DroneNo][0]"""
+            WaypointsNED = NEDdata.getWaypointsNED()
+            # print("Initial positions", init_posNED)
+            # print("Waypoints", WaypointsNED)
+
+
+        else:  # Runs with random init pos !!
+
+            # Put drones in initial positions (close to physical or random)
+
+            DARPgrid = initializeDARPGrid(randomInitPos, l, m, initial_positions, megaNodes, theta, shiftX,
+                                          shiftY, DARPgrid)
+            positions_DARPgrid = np.where(DARPgrid == 2)
+
+            positions_DARPgrid = np.asarray(positions_DARPgrid).T
+            positions = []
+            for elem in positions_DARPgrid:
+                positions.append(grid[elem[0], elem[1]])
+
+            poly = DARPinPoly(rows, cols, DARPgrid, notEqualPortions, positions, portions, obs_pos, False, megaNodes,
+                              subNodes, randomInitPos, initial_positions, theta, shiftX, shiftY, initializeDARPGrid, rotate)
+
+
+            """ WaypointsNED are in the form of WaypointsNED[DroneNo][0]"""
+            WaypointsNED = poly.getWaypointsNED()
+            init_posNED = [WaypointsNED[drone][0][0] for drone in range(droneNo)]  # parse empty list to plot
+
         """ Visualize NED Paths """
-        PlotNEDPaths(cartUnrotated, obstNED, droneNo, WaypointsNED, init_posNED).plot()
+        PlotNEDPaths(cartUnrotated, obstNED, droneNo, WaypointsNED, init_posNED, optimal_init_pos).plot()
 
     else:
         """ ----------------------------------- Run on grid parameters --------------------------------------------- """

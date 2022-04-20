@@ -5,12 +5,13 @@ import matplotlib.pyplot as plt
 
 class PlotNEDPaths:
 
-	def __init__(self, cart, cartObst, droneNo, missionWaypointsNED, init_posNED):
+	def __init__(self, cart, cartObst, droneNo, missionWaypointsNED, init_posNED, optuna):
 		self.cart = cart
 		self.cartObst = cartObst
 		self.droneNo = droneNo
 		self.missionWaypointsNED = missionWaypointsNED
 		self.init_posNED = init_posNED
+		self.optuna = optuna
 
 	def plot(self):
 
@@ -45,6 +46,7 @@ class PlotNEDPaths:
 		y_init_pos = [[] for _ in range(self.droneNo)]
 
 		for i in range(self.droneNo):
+			#if self.optuna:
 			x_init_pos[i].append(self.init_posNED[i][1])
 			y_init_pos[i].append(self.init_posNED[i][0])
 			for j in range(len(self.missionWaypointsNED[i][0])):
@@ -64,6 +66,12 @@ class PlotNEDPaths:
 		# plot Obstacle polygon
 		if len(self.cartObst) > 0:
 			plt.plot(obstx, obsty, '--', color='red')
+
+
+		if self.optuna:
+			plt.title("Optimal Initial Positions")
+		else:
+			plt.title("Random Initial Positions")
 
 		# Merge all in one figure
 		plt.show()
