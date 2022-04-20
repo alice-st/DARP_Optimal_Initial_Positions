@@ -59,5 +59,6 @@ real_world = True
 AirSim = True  # AirSim can be True ONLY if real_world = True
 
 # IF AirSim is True:
-distance_threshold = 2  # If AirSim True, define the distance threshold from Turn-Wps (Usually in range [0.1,2])
+distance_threshold = 4  # If AirSim is True, define the distance threshold from Turn-Wps (Usually in range [0.1,2])
 velocity = 3  # in m/s
+corner_radius = velocity + 3

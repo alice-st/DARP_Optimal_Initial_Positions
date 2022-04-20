@@ -50,7 +50,7 @@ class optimize():
         self.samplers = [optuna.samplers.TPESampler()]
         # optuna.integration.BoTorchSampler(),
         # optuna.samplers.CmaEsSampler()]
-        self.number_of_trials = 50
+        self.number_of_trials = 100
         self.results = []
         self.all_instances = []
 
@@ -205,7 +205,7 @@ if __name__ == '__main__':
 
         import json
 
-        file = open('inputVariables_choosepath.json')
+        file = open('inputVariables_test.json')
         data = json.load(file)
 
         # file = open('D:\AirSim\PythonClient\\adaptive_path_planning\mCPP\inputVariables_Cofly003.json')
@@ -487,12 +487,13 @@ if __name__ == '__main__':
         def update_path(self):
             global getpose
             global resulting_path
-            global ned_dist
-            global corner_radius
+            # global ned_dist
+
             global turn
 
-            try:
-                for i in range(droneNo):
+            for i in range(droneNo):
+                try:
+
 
                     getpose = GetMultirotorState('Drone{}'.format(i + 1))
 
@@ -509,26 +510,11 @@ if __name__ == '__main__':
                         del path_drone[i][0]
                         print("WPs to go for Drone{}:".format(i + 1), len(path_drone[i]))
 
-                    if ned_dist < corner_radius:  # Corner Radius MODE
-                        resulting_path = client.moveOnPathAsync(path_drone[i], 1, 500,
-                                                                airsim.DrivetrainType.ForwardOnly,
-                                                                airsim.YawMode(False, 0),
-                                                                vehicle_name='Drone{}'.format(i + 1))
-                        turn = True  # Drone is in Turn
-                    else:
-
-                        resulting_path = client.moveOnPathAsync(path_drone[i], velocity, 500,
-                                                                airsim.DrivetrainType.ForwardOnly,
-                                                                airsim.YawMode(False, 0),
-                                                                vehicle_name='Drone{}'.format(i + 1))
                     if len(path_drone[i]) == 0:
-                        # End of execution time
-                        # end = time.time()
-
-                        get_time = client.getMultirotorState('Drone{}'.format(i + 1))
-                        end_date_time = datetime.fromtimestamp(get_time.timestamp // 1000000000)
-                        print('Last WP !! --- Drone{} starts to follow the path at {} ---'.format(i + 1,
-                                                                                                  end_date_time - start_date_time))
+                        #get_time = client.getMultirotorState('Drone{}'.format(i + 1))
+                        end_date_time = datetime.fromtimestamp(getpose.timestamp // 1000000000)
+                        print('Last WP !! --- Drone{} ends to follow the path at {} ---'.format(i + 1,
+                                                                                                end_date_time - start_date_time))
 
                         # Execution time
                         Execution_time = end_date_time - start_date_time
@@ -540,8 +526,22 @@ if __name__ == '__main__':
 
 
 
-            except:
-                pass
+                    if ned_dist < corner_radius:  # Corner Radius MODE
+                        resulting_path = client.moveOnPathAsync(path_drone[i], 1, 500,
+                                                                airsim.DrivetrainType.ForwardOnly,
+                                                                airsim.YawMode(False, 0),
+                                                                vehicle_name='Drone{}'.format(i + 1))
+                        # print("Corner Radius mode for Drone {}".format(i + 1))
+                        turn = True  # Drone is in Turn
+                    else:
+
+                        resulting_path = client.moveOnPathAsync(path_drone[i], velocity, 500,
+                                                                airsim.DrivetrainType.ForwardOnly,
+                                                                airsim.YawMode(False, 0),
+                                                                vehicle_name='Drone{}'.format(i + 1))
+
+                except:
+                    pass
 
 
     if AirSim:
@@ -597,41 +597,55 @@ if __name__ == '__main__':
         for i in range(droneNo):
             hovering = client.moveToZAsync(z, 5, vehicle_name='Drone{}'.format(i + 1)).join()
 
-        # send missions to drones
+        # send missions to drones / send initial positions to the drones
         for i in range(droneNo):
-            mission = client.moveOnPathAsync(path_drone[i], velocity, 500, airsim.DrivetrainType.ForwardOnly,
+            # mission = client.moveOnPathAsync(path_drone[i], velocity, 500, airsim.DrivetrainType.ForwardOnly,
+            #                                  airsim.YawMode(False, 0), 3 + 3 / 2, vehicle_name='Drone{}'.format(i + 1))
+
+            initial_pos_on_AirSim = client.moveToPositionAsync(path_drone[i][0].x_val, path_drone[i][0].y_val, path_drone[i][0].z_val, velocity, 500, airsim.DrivetrainType.ForwardOnly,
                                              airsim.YawMode(False, 0), 3 + 3 / 2, vehicle_name='Drone{}'.format(i + 1))
 
         # Wait until first WP is reached
         movetopath = True
+        # movetopath = [True for _ in range(droneNo)]
         movetopath_status = [False for _ in range(droneNo)]
         while movetopath:
             for i in range(droneNo):
-                get_initial_pose = client.getMultirotorState('Drone{}'.format(i + 1))
 
-                current_ned = np.array(
-                    (get_initial_pose.kinematics_estimated.position.x_val,
-                     get_initial_pose.kinematics_estimated.position.y_val))
-                nextWP_ned = np.array((path_drone[i][0].x_val, path_drone[i][0].y_val))
-                ned_dist = np.linalg.norm(current_ned - nextWP_ned)
+                if movetopath_status[i] is False:
 
-                if ned_dist < distance_threshold:
-                    # start measuring execution time
-                    # start = time.time()
+                    get_initial_pose = client.getMultirotorState('Drone{}'.format(i + 1))
 
-                    # get_time = client.getMultirotorState('Drone{}'.format(i + 1))
-                    # from datetime import datetime
-                    #
-                    # start_date_time = datetime.fromtimestamp(get_time.timestamp // 1000000000)
-                    # print(" --- First WP !! --- Drone{} starts to follow the path at {} ---".format(i + 1,
-                    #                                                                                 start_date_time))
+                    current_ned = np.array(
+                        (get_initial_pose.kinematics_estimated.position.x_val,
+                         get_initial_pose.kinematics_estimated.position.y_val))
+                    nextWP_ned = np.array((path_drone[i][0].x_val, path_drone[i][0].y_val))
+                    ned_dist = np.linalg.norm(current_ned - nextWP_ned)
 
-                    del path_drone[i][0]
-                    movetopath_status = [True if x == i else x for x in movetopath_status]
-                    print("Drone{}: WPs to go:".format(i + 1), len(path_drone[i]))
+                    if ned_dist < distance_threshold:
+                        # start measuring execution time
 
-                    movetopath = False in (elem is True for ele in movetopath_status)
-                    onpath = True in (elem is True for ele in movetopath_status)
+                        # get_time = client.getMultirotorState('Drone{}'.format(i + 1))
+                        # from datetime import datetime
+                        #
+                        # start_date_time = datetime.fromtimestamp(get_time.timestamp // 1000000000)
+                        # print(" --- First WP !! --- Drone{} starts to follow the path at {} ---".format(i + 1,
+                        #                                                                                 start_date_time))
+
+                        del path_drone[i][0]
+                        movetopath_status[i] = True
+
+                        # movetopath = [False if x == i else x for x in movetopath]
+                        print("Drone{}: WPs to go:".format(i + 1), len(path_drone[i]))
+
+                        movetopath = False in (elem is True for elem in movetopath_status)
+                        onpath = all(movetopath_status)
+
+
+                        print("status", movetopath_status)
+                        print("moveonpath", movetopath)
+                        print("onpath", onpath)
+                        # onpath = [True in (elem is False for elem in movetopath) for _ in range(droneNo)]
 
 
         for i in range(droneNo):
@@ -645,26 +659,29 @@ if __name__ == '__main__':
         # Start Thread for updating the path -- Background process
         Thread_class(True)
 
+        moveonpath_status = [False for _ in range(droneNo)]
         while onpath:
             for i in range(droneNo):
 
                 if len(path_drone[i]) == 0:
+                    moveonpath_status[i] = True
                     # End of execution time
                     # end = time.time()
 
-                    get_time = client.getMultirotorState('Drone{}'.format(i + 1))
-                    end_date_time = datetime.fromtimestamp(get_time.timestamp // 1000000000)
-                    print('Last WP !! --- Drone{} starts to follow the path at {} ---'.format(i + 1,
-                                                                                              end_date_time - start_date_time))
-
-                    # Execution time
-                    Execution_time = end_date_time - start_date_time
-
-                    file_exec_time.write(
-                        ''.join('Overall execution time for Drone{} is {} sec'.format(i + 1, Execution_time)))
-                    file_exec_time.write(''.join('\n'))
+                    # get_time = client.getMultirotorState('Drone{}'.format(i + 1))
+                    # end_date_time = datetime.fromtimestamp(get_time.timestamp // 1000000000)
+                    # print('Last WP !! --- Drone{} ends to follow the path at {} ---'.format(i + 1,
+                    #                                                                           end_date_time - start_date_time))
+                    #
+                    # # Execution time
+                    # Execution_time = end_date_time - start_date_time
+                    #
+                    # file_exec_time.write(
+                    #     ''.join('Overall execution time for Drone{} is {} sec'.format(i + 1, Execution_time)))
+                    # file_exec_time.write(''.join('\n'))
                     # onpath will be False if any Drone finishes its path
-                    onpath = False in (len(path_drone[droneNo]) == 0 for drone in range(droneNo))
+                    onpath = not all(moveonpath_status)
+                    #onpath = [False if x == i else x for x in onpath]
 
         # END
         airsim.wait_key('Press any key to reset to original state')
@@ -675,5 +692,5 @@ if __name__ == '__main__':
             # that's enough fun for now. let's quit cleanly
             client.enableApiControl(False, "Drone{}".format(i + 1))
         print(
-            " -------------- Overall execution for every drone is written in the Flight_time.txt -------------------")
+            " -------------- Overall execution for every drone is written in the Flight_time.txt ------------------- ")
         file_exec_time.close()

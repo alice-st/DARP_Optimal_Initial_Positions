@@ -189,19 +189,19 @@ class NodesInPoly(object):
     @staticmethod
     @njit()
     def checkInPolyAndObstacle(i, j, subNodes, megaNodes, cartObst, megaNodesCount):
-        if len(cartObst) > 0:
-            for k in range(len(cartObst)):
-                if InPolygon.check([subNodes[2 * i][2 * j + 1][0], subNodes[2 * i][2 * j + 1][1]],
-                                   cartObst[k]) or InPolygon.check(
-                    [subNodes[2 * i + 1][2 * j + 1][0], subNodes[2 * i + 1][2 * j + 1][1]],
-                    cartObst[k]) or InPolygon.check(
-                    [subNodes[2 * i][2 * j][0], subNodes[2 * i][2 * j][1]],
-                    cartObst[k]) or InPolygon.check(
-                    [subNodes[2 * i + 1][2 * j][0], subNodes[2 * i + 1][2 * j][1]], cartObst[k]):
-                    megaNodes[i][j][2] = 1
-                elif megaNodes[i][j][2] != 1:
-                    megaNodes[i][j][2] = 0
-                    megaNodesCount += 1
+        # if len(cartObst) > 0:
+        #     for k in range(len(cartObst)):
+        #         if InPolygon.check([subNodes[2 * i][2 * j + 1][0], subNodes[2 * i][2 * j + 1][1]],
+        #                            cartObst[k]) or InPolygon.check(
+        #             [subNodes[2 * i + 1][2 * j + 1][0], subNodes[2 * i + 1][2 * j + 1][1]],
+        #             cartObst[k]) or InPolygon.check(
+        #             [subNodes[2 * i][2 * j][0], subNodes[2 * i][2 * j][1]],
+        #             cartObst[k]) or InPolygon.check(
+        #             [subNodes[2 * i + 1][2 * j][0], subNodes[2 * i + 1][2 * j][1]], cartObst[k]):
+        #             megaNodes[i][j][2] = 1
+        #         elif megaNodes[i][j][2] != 1:
+        #             megaNodes[i][j][2] = 0
+        #             megaNodesCount += 1
 
         if megaNodes[i][j][2] != 1:
             megaNodes[i][j][2] = 0  # free space
