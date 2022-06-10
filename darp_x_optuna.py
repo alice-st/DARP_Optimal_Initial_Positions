@@ -22,12 +22,11 @@ class optimize():
         self.vis = vis
         
         # Optimization Parameters
-        self.samplers = [optuna.samplers.TPESampler(), 
-                        optuna.integration.BoTorchSampler(),
-                        optuna.samplers.CmaEsSampler()]
+        self.samplers = [optuna.samplers.TPESampler()]
         self.number_of_trials = number_of_trials
         self.results = []
         self.best_avg = sys.maxsize
+        self.all_instances = []
 
     def optimize(self):        
         for sampler in self.samplers:
@@ -39,7 +38,14 @@ class optimize():
             )
             study.optimize(self.objective, n_trials=self.number_of_trials)
             self.results.append(study)
-
+        
+        for result in self.results:
+                best_avg = sys.maxsize
+                for t in result.best_trials:
+                    if self.all_instances[t.number].best_case.avg < best_avg:
+                        best_avg = self.all_instances[t.number].best_case.avg
+                        self.best_trial = self.all_instances[t.number]
+    
     def objective(self, trial):
         positions = []
 
@@ -47,13 +53,17 @@ class optimize():
             positions.append(trial.suggest_int(f"p{i}", 0, self.rows*self.cols-1))
 
         if len(positions) != len(set(positions)):
+            self.all_instances.append("Pruned")
             raise TrialPruned()
         
         for obstacle in self.obstacles_positions:
             for p in positions:
                 if p == obstacle:
+                    self.all_instances.append("Pruned")
                     raise TrialPruned()
+
         multiRobotPathPlanner_instance = MultiRobotPathPlanner(self.rows, self.cols, self.nep, positions, self.portions, self.obstacles_coords, self.vis)
+        self.all_instances.append(multiRobotPathPlanner_instance)
 
         if not multiRobotPathPlanner_instance.DARP_success:
             raise TrialPruned()
