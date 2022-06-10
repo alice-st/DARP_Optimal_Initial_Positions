@@ -10,16 +10,11 @@ from multiRobotPathPlanner import MultiRobotPathPlanner
 from optuna.structs import TrialPruned
 
 class optimize():
-    def __init__(self, rows, cols, MaxIter, CCvariation, randomLevel, dcells, importance, nep, portions, obstacles_positions, vis, num_drones):
+    def __init__(self, rows, cols, number_of_trials, nep, portions, obstacles_positions, vis, num_drones):
         # DARP Parameters
         self.number_of_drones = num_drones
         self.cols = cols
         self.rows = rows
-        self.MaxIter = MaxIter
-        self.CCvariation = CCvariation
-        self.randomLevel = randomLevel
-        self.dcells = dcells
-        self.importance = importance
         self.nep = nep
         self.portions = portions
         self.obstacles_positions = obstacles_positions
@@ -30,7 +25,7 @@ class optimize():
         self.samplers = [optuna.samplers.TPESampler(), 
                         optuna.integration.BoTorchSampler(),
                         optuna.samplers.CmaEsSampler()]
-        self.number_of_trials = 500
+        self.number_of_trials = number_of_trials
         self.results = []
         self.best_avg = sys.maxsize
 
@@ -38,7 +33,7 @@ class optimize():
         for sampler in self.samplers:
             study = optuna.create_study(
                 study_name="study",
-                directions=["maximize"],
+                directions=["minimize"],
                 sampler=sampler,
                 pruner=optuna.pruners.MedianPruner()
             )
@@ -58,7 +53,6 @@ class optimize():
             for p in positions:
                 if p == obstacle:
                     raise TrialPruned()
-
         multiRobotPathPlanner_instance = MultiRobotPathPlanner(self.rows, self.cols, self.nep, positions, self.portions, self.obstacles_coords, self.vis)
 
         if not multiRobotPathPlanner_instance.DARP_success:
@@ -86,9 +80,14 @@ class optimize():
                 print(f"Best trial: {t.number}")
                 print(f'Best value: {t.values[0]}')
                 print(f'Best param: {t.params}')
-
+                
                 with open(f'x = {self.rows}, y = {self.cols}, num_drones = {self.number_of_drones}, obstacles = {obs_flag}/{result.sampler}.txt', "a") as f1:
-                    f1.write(f"Best trial: %s \nBest value: %s \nBest param: %s:\n" % (t.number, t.values[0], t.params))
+                    f1.write(f"Best trial: {t.number}\n")
+                    f1.write(f"Best value: {t.values[0]}\n")
+                    f1.write(f"Best parameters:")
+                    for param, val in t.params.items():
+                        f1.write(f"{val}")
+                        f1.write(" ")
                     f1.close()
 
             params = []
@@ -118,8 +117,8 @@ class optimize():
                 
                 f1.close()
 
-            fig = optuna.visualization.plot_contour(result, params=params)
-            fig.write_image(f'x = {self.rows}, y = {self.cols}, num_drones = {self.number_of_drones}, obstacles = {obs_flag}/{result.sampler}_contour.png')
+            # fig = optuna.visualization.plot_contour(result, params=params)
+            # fig.write_image(f'x = {self.rows}, y = {self.cols}, num_drones = {self.number_of_drones}, obstacles = {obs_flag}/{result.sampler}_contour.png')
 
             counter += 1
 
@@ -187,10 +186,6 @@ if __name__ == '__main__':
         print("Sum of portions should be equal to 1.")
         sys.exit(1)
 
-    MaxIter = 20000
-    CCvariation = 0.01
-    randomLevel = 0.0001
-    dcells = 2
     importance = False
 
     print("\nInitial Conditions Defined:")
@@ -198,6 +193,13 @@ if __name__ == '__main__':
     print("Robot Number:", num_drones)
     print("Portions for each Robot:", portions, "\n")
 
-    optimization = optimize(rows, cols, MaxIter, CCvariation, randomLevel, dcells, importance, args.nep, portions, args.obs_pos, args.vis, num_drones)
+    if rows == 10 and cols == 10:
+        number_of_trials = 2000
+    elif rows == 15 and cols == 20:
+        number_of_trials = 5000
+    else:
+        number_of_trials = 8000
+
+    optimization = optimize(rows, cols, number_of_trials, args.nep, portions, args.obs_pos, args.vis, num_drones)
     optimization.optimize()
     optimization.export_results()
