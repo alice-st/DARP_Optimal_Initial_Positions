@@ -60,13 +60,75 @@ python3 darp_x_optuna.py
 ```
 
 ### Usage
+
 By default, without defining any parameters, the darp_x_optuna is going to run for the following setup:
 
 **Grid Dimensions:** 10 10
 **Robot Number:** 3
 **Portions for each Robot:** [0.3, 0.3, 0.3] 
 
-The expected results inlude the optimal initial positions for the three robots. The final paths can be found under the directory DARP_Optimal_Initial_Positions/results/
+The optimization results, inluding the optimal initial positions for the robots, can be found under the directory DARP_Optimal_Initial_Positions/Results/
+
+To define specific parameters please use the instructions below:
+
+#### To modify the Grid Dimensions, use:
+```
+python3 darp_x_optuna.py -grid x y
+
+```
+where x, y are the desired rows and columns of the Grid respectively (default: 10, 10).
+
+#### To modify the number of Robots, use:
+
+```
+python3 darp_x_optuna.py -num_drones k
+```
+where k is the desired number of robots (default: 3).
+
+#### To assign different portions to each Robot (not Equal), use:
+
+
+```
+python3 darp_x_optuna.py -nep -portions p_a p_b p_c
+
+```
+
+where p_a p_b p_c are the portions assigned to Robots a, b and c respectively. Their sum should be equal to 1. (default: 0.2, 0.3, 0.5)
+
+If -nep is activated (set to True), the algorithm runs for not equal territories with 20%, 30% and 50% coverage per robot. Otherwise, the algorithm runs for equal territories with 33,33% coverage per robot. 
+
+
+#### To use different positions for the obstacles in the Grid, use:
+
+```
+python3 darp_x_optuna.py -obs_pos o1 o2 o3
+```
+
+where o1 o2 and o3 are the positions of the obstacles in the Grid. Obstacle positions should not overlap with Robots' initial positions. (default: 5, 6, 7) (row=0,column=0 --> cell=0, row=0,column=1 --> cell=1 etc.)
+
+#### To visualize the final optimization results, use:
+
+```
+python3 darp_x_optuna.py -vis
+```
+
+#### To modify the total number of optimization trials, use:
+
+```
+python3 darp_x_optuna.py -number_of_trials num_trials
+```
+
+where num_trials is the desired number of optimization trials (default: 200).
+
+#### Demo example:
+ 
+ ```
+python3 darp_x_optuna.py -vis -nep -obs_pos 10 11 12 21 22 23 33 34 35 45 46 47 57 -in_pos 0 99 32 -portions 0.7 0.2 0.1
+```
+
+##  Example execution
+
+Using a 20x20 Grid area, four robots with initial positions 10, 32, 99 and 250 and Equal portions of the Grid shared between the robots, we obtained the following results:
 
 
 ## Optimization Results

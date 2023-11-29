@@ -23,4 +23,6 @@ pip install \
   opencv-python\
   pygame\
   scikit-learn\
-  numba
+  numba\
+  kaleido\
+  plotly\
