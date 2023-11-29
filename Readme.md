@@ -123,13 +123,8 @@ where num_trials is the desired number of optimization trials (default: 200).
 #### Demo example:
  
  ```
-python3 darp_x_optuna.py -vis -nep -obs_pos 10 11 12 21 22 23 33 34 35 45 46 47 57 -in_pos 0 99 32 -portions 0.7 0.2 0.1
+python3 darp_x_optuna.py -vis -nep -obs_pos 10 11 12 21 22 23 33 34 35 45 46 47 57 -num_drones 3 -portions 0.7 0.2 0.1 -number_of_trials 300
 ```
-
-##  Example execution
-
-Using a 20x20 Grid area, four robots with initial positions 10, 32, 99 and 250 and Equal portions of the Grid shared between the robots, we obtained the following results:
-
 
 ## Optimization Results
 
@@ -186,11 +181,11 @@ This project has received funding from the European Commission under the Europea
 
 ## Contributors
 
-Aliki Stefanopoulou - [github](https://github.com/alice-st) - aliki.stefano@gmail.com
-Emmanuel K. Raptis - [github](https://github.com/emmarapt) - emmarapt@iti.gr
-Savvas Apostolidis- [github](https://github.com/savvas-ap) - sapostol@ee.duth.gr
-Socratis Gkelios- [github](https://github.com/soc12) - sgkelios@ee.duth.gr
-Athanasios Ch. Kapoutsis - [github](https://github.com/athakapo) - athakapo@iti.gr
+- Aliki Stefanopoulou - [github](https://github.com/alice-st) - aliki.stefano@gmail.com
+- Emmanuel K. Raptis - [github](https://github.com/emmarapt) - emmarapt@iti.gr
+- Savvas Apostolidis- [github](https://github.com/savvas-ap) - sapostol@ee.duth.gr
+- Socratis Gkelios- [github](https://github.com/soc12) - sgkelios@ee.duth.gr
+- Athanasios Ch. Kapoutsis - [github](https://github.com/athakapo) - athakapo@iti.gr
 
 ## Cite As
 

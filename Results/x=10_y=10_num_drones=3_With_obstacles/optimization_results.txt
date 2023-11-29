@@ -1,0 +1,10 @@
+Best trial: 151
+Best value: 32.0
+Best Initial positions: {'p0': 67, 'p1': 6, 'p2': 58}
+Best Initial positions in cartesian coordinates: [(6, 8), (0, 7), (5, 8)]
+Average number of turns: 16.666666666666668
+Best trial: 267
+Best value: 32.0
+Best Initial positions: {'p0': 93, 'p1': 5, 'p2': 58}
+Best Initial positions in cartesian coordinates: [(8, 7), (0, 6), (6, 8)]
+Average number of turns: 19.333333333333332
