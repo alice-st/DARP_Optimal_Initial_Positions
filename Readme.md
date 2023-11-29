@@ -1,13 +1,12 @@
-### DARP Optimal Initial Positions
+## DARP Optimal Initial Positions
 
 Welcome to our project, a comprehensive Multi-Robot Coverage Path Planning module (mCPP) that leverages the DARP algorithm to efficiently cover an area of interest, taking into account predefined NoFly zones/obstacles within a designated grid. This implementation is designed to optimize initial positions for a team of mobile robots, specifically tailored for multi-UAV coverage missions.
 
-## Key Features:
+### Key Features:
 
 The foundation of our methodology already encompasses a suite of features aimed at maximizing the efficiency of individual paths. However, this project introduces an optimization procedure to further enhance performance:
 
 1. **Shape Complexity Reduction:**
-
 The optimization procedure minimizes the complexity of exclusive sub-regions, thereby reducing the number of turns required in the multi-robot solution.
 
 2. **Energy and Time Efficiency:**
@@ -16,7 +15,7 @@ The algorithm not only streamlines path shapes but also improves energy and time
 3. **Launch Points Optimization:**
 Precise control of UAV launch points is implemented, suggesting ideal locations for setting up launching/docking stations for long-term coverage operations.
 
-## Optimization Algorithm: Tree-Structured Parzen Estimator (TPE)
+### Optimization Algorithm: Tree-Structured Parzen Estimator (TPE)
 
 In the quest for optimal UAV launch points, the choice of an optimization algorithm is critical. After thorough consideration, we have selected the Tree-Structured Parzen Estimator (TPE) as our primary tool for this task.
 Why TPE?
@@ -34,7 +33,42 @@ This strategic use of TPE ensures a time-efficient and cost-effective convergenc
 
 Thank you for exploring our project! If you have any questions or suggestions, feel free to reach out.
 
-# DARP_Optimal_Initial_Positions
+### **Requirements**
+This project was created using:
+    - Python version: 3.10.12
+    - numpy: 1.26.2
+    - matplotlib: 3.8.2
+    - optuna: 2.0.0
+    - opencv-python: 4.8.1.78
+    - pygame: 2.5.2
+    - scikit-learn: 1.3.2
+    - numba: 0.58.1
+
+### Installation and Running
+#### To install the application, use:
+```
+git clone https://github.com/alice-st/DARP_Optimal_Initial_Positions.git --recurse-submodules
+cd DARP_Optimal_Initial_Positions
+./requirements.sh darp-venv 
+. darp-venv/bin/activate
+```
+
+#### To run the application, use:
+
+```
+python3 darp_x_optuna.py
+```
+
+### Usage
+By default, without defining any parameters, the darp_x_optuna is going to run for the following setup:
+
+**Grid Dimensions:** 10 10
+**Robot Number:** 3
+**Portions for each Robot:** [0.3, 0.3, 0.3] 
+
+The expected results inlude the optimal initial positions for the three robots. The final paths can be found under the directory DARP_Optimal_Initial_Positions/results/
+
+
 ## Optimization Results
 ### Grid Dimensions: 10x10, Number of drones: 3, Without Obstacles
 

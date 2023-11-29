@@ -48,7 +48,6 @@ class optimize():
     
     def objective(self, trial):
         positions = []
-
         for i in range(self.number_of_drones):
             positions.append(trial.suggest_int(f"p{i}", 0, self.rows*self.cols-1))
 
@@ -133,7 +132,6 @@ class optimize():
             counter += 1
 
 if __name__ == '__main__':
-
     argparser = argparse.ArgumentParser(
         description=__doc__)
     argparser.add_argument(
@@ -168,21 +166,28 @@ if __name__ == '__main__':
         type=int,
         nargs=1,
         help='Insert desired number of drones')
+    argparser.add_argument(
+        '-number_of_trials',
+        default=[200],
+        type=int,
+        nargs=1,
+        help='Insert desired number of trials')
+    
     args = argparser.parse_args()
-
     rows, cols = args.grid
     num_drones = args.num_drones[0]
+    number_of_trials = args.number_of_trials
 
+    # Sanity checks:
+    
     for obstacle in args.obs_pos:
         if obstacle < 0 or obstacle >= rows*cols:
             print("Obstacles should be inside the Grid.")
             sys.exit(3)
 
     portions = []
-
     if args.nep:
-        for portion in args.portions:
-            portions.append(portion)
+        portions.extend(args.portions)
     else:
         for drone in range(num_drones):
             portions.append(1/num_drones)
@@ -196,19 +201,10 @@ if __name__ == '__main__':
         print("Sum of portions should be equal to 1.")
         sys.exit(1)
 
-    importance = False
-
     print("\nInitial Conditions Defined:")
     print("Grid Dimensions:", rows, cols)
     print("Robot Number:", num_drones)
     print("Portions for each Robot:", portions, "\n")
-
-    if rows == 10 and cols == 10:
-        number_of_trials = 2000
-    elif rows == 15 and cols == 20:
-        number_of_trials = 5000
-    else:
-        number_of_trials = 8000
 
     optimization = optimize(rows, cols, number_of_trials, args.nep, portions, args.obs_pos, args.vis, num_drones)
     optimization.optimize()
