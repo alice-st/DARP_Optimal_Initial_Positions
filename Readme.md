@@ -174,3 +174,25 @@ Using a 20x20 Grid area, four robots with initial positions 10, 32, 99 and 250 a
 | Optimized Paths | Random Paths |
 | ----------------------------------- | ----------------------------------- |
 | ![Optimized](Demo_Results/Paths/optimized/x=20_y=20_num_drones=9_obstacles=With_obstacles.png) | ![Random](Demo_Results/Paths/random/x=20_y=20_num_drones=9_obstacles=With_obstacles.png) |
+
+
+## License
+
+Distributed under the MIT License. See [LICENSE](https://github.com/alice-st/DARP_Optimal_Initial_Positions/tree/main/LICENSE) for more information.
+
+## Acknowledgments
+
+This project has received funding from the European Commission under the European Union's Horizon 2020 research and innovation programme under grant agreement no 883302 (ISOLA).
+
+## Contributors
+
+Aliki Stefanopoulou - [github](https://github.com/alice-st) - aliki.stefano@gmail.com
+Emmanuel K. Raptis - [github](https://github.com/emmarapt) - emmarapt@iti.gr
+Savvas Apostolidis- [github](https://github.com/savvas-ap) - sapostol@ee.duth.gr
+Socratis Gkelios- [github](https://github.com/soc12) - sgkelios@ee.duth.gr
+Athanasios Ch. Kapoutsis - [github](https://github.com/athakapo) - athakapo@iti.gr
+
+## Cite As
+
+Not published yet.
+
