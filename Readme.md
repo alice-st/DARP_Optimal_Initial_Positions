@@ -132,7 +132,20 @@ Using a 20x20 Grid area, four robots with initial positions 10, 32, 99 and 250 a
 
 
 ## Optimization Results
-### Grid Dimensions: 10x10, Number of drones: 3, Without Obstacles
+
+### Grid Dimensions: 15x20, Number of Drones: 3, Without Obstacles
+
+| Optimized Paths                     | Random Paths                            |
+| ----------------------------------- | ----------------------------------- |
+| ![Optimized](Demo_Results/Paths/optimized/x%20=%2015,%20y%20=%2020,%20num_drones%20=%203,%20obstacles%20=%20No_obstacles.png) | ![Random](Demo_Results/Paths/random/x%20=%2015,%20y%20=%2020,%20num_drones%20=%203,%20obstacles%20=%20No_obstacles.png) |
+
+### Grid Dimensions: 20x20, Number of Drones: 3, Without Obstacles
+| Optimized Paths | Random Paths |
+| ----------------------------------- | ----------------------------------- |
+| ![Optimized](Demo_Results/Paths/optimized/x%20=%2020,%20y%20=%2020,%20num_drones%20=%203,%20obstacles%20=%20No_obstacles.png) | ![Random](Demo_Results/Paths/random/x%20=%2020,%20y%20=%2020,%20num_drones%20=%203,%20obstacles%20=%20No_obstacles.png) |
+
+
+### Grid Dimensions: 15x20, Number of Drones: 6, With Obstacles
 
 <p align="left">
   <img width="250" height="250" src="1500_trials/Paths/best_paths/x = 10, y = 10, num_drones = 3, obstacles = No_obstacles.png">
