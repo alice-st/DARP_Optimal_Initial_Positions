@@ -35,6 +35,7 @@ Thank you for exploring our project! If you have any questions or suggestions, f
 
 ### **Requirements**
 This project was created using:
+
     * Python version: 3.10.12
     * numpy: 1.26.2
     * matplotlib: 3.8.2
