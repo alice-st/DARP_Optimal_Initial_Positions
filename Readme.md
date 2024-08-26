@@ -188,6 +188,17 @@ This project has received funding from the European Commission under the Europea
 - Socratis Gkelios- [github](https://github.com/soc12) - sgkelios@ee.duth.gr
 - Athanasios Ch. Kapoutsis - [github](https://github.com/athakapo) - athakapo@iti.gr
 
+
+## Extra Material
+
+DARP GitHub repositories: [Java](https://github.com/athakapo/DARP) [Python](https://github.com/alice-st/DARP)
+
+GUI demo DARP: [YouTube](https://www.youtube.com/watch?v=LrGfvma41Ak)
+
+ROS integration DARP: [Wiki](http://wiki.ros.org/area_division)
+
+DARP Real World to Airsim: [Python](https://github.com/emmarapt/RealWorld2AirSim-DARP)
+
 ## Cite As
 
 @article{article,
