@@ -35,14 +35,14 @@ Thank you for exploring our project! If you have any questions or suggestions, f
 
 ### **Requirements**
 This project was created using:
-    - Python version: 3.10.12
-    - numpy: 1.26.2
-    - matplotlib: 3.8.2
-    - optuna: 2.0.0
-    - opencv-python: 4.8.1.78
-    - pygame: 2.5.2
-    - scikit-learn: 1.3.2
-    - numba: 0.58.1
+    * Python version: 3.10.12
+    * numpy: 1.26.2
+    * matplotlib: 3.8.2
+    * optuna: 2.0.0
+    * opencv-python: 4.8.1.78
+    * pygame: 2.5.2
+    * scikit-learn: 1.3.2
+    * numba: 0.58.1
 
 ### Installation and Running
 #### To install the application, use:
