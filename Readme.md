@@ -189,5 +189,12 @@ This project has received funding from the European Commission under the Europea
 
 ## Cite As
 
-Not published yet.
-
+@article{article,
+author = {Stefanopoulou, Aliki and Raptis, Emmanuel K. and Apostolidis, Savvas and Gkelios, Socratis and Kapoutsis, Athanasios and Chatzichristofis, Savvas and Vrochidis, Stefanos and Kosmatopoulos, Elias},
+year = {2024},
+month = {04},
+pages = {1-19},
+title = {Improving time and energy efficiency in multi-UAV coverage operations by optimizing the UAVs’ initial positions},
+journal = {International Journal of Intelligent Robotics and Applications},
+doi = {10.1007/s41315-024-00333-2}
+}
