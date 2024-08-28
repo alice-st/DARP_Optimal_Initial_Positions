@@ -201,12 +201,28 @@ DARP Real World to Airsim: [Python](https://github.com/emmarapt/RealWorld2AirSim
 
 ## Cite As
 
-@article{article,
-author = {Stefanopoulou, Aliki and Raptis, Emmanuel K. and Apostolidis, Savvas and Gkelios, Socratis and Kapoutsis, Athanasios and Chatzichristofis, Savvas and Vrochidis, Stefanos and Kosmatopoulos, Elias},
-year = {2024},
-month = {04},
-pages = {1-19},
-title = {Improving time and energy efficiency in multi-UAV coverage operations by optimizing the UAVs’ initial positions},
-journal = {International Journal of Intelligent Robotics and Applications},
-doi = {10.1007/s41315-024-00333-2}
+*Stefanopoulou, A., Raptis, E.K., Apostolidis, S.D. et al. Improving time and energy efficiency in multi-UAV coverage operations by optimizing the UAVs’ initial positions. Int J Intell Robot Appl (2024).*
+
+  \[[Link](https://link.springer.com/article/10.1007/s41315-024-00333-2)\]
+
+  ```bibtex
+
+@article{Stefanopoulou2024optimaldarp,
+
+  title={Improving time and energy efficiency in multi-UAV coverage operations by optimizing the UAVs’ initial positions},
+
+  author={Stefanopoulou, Aliki and Raptis, Emmanuel K. and Apostolidis, Savvas and Gkelios, Socratis and Kapoutsis, Athanasios and Chatzichristofis, Savvas and Vrochidis, Stefanos and Kosmatopoulos, Elias},
+
+  journal={International Journal of Intelligent Robotics and Applications},
+
+  pages={1--19},
+
+  year={2024},
+
+  doi = {10.1007/s41315-024-00333-2}, 
+
+  publisher={Springer}
+
 }
+
+
